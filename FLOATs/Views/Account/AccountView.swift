@@ -18,8 +18,15 @@ struct AccountView: View {
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
                 VStack(alignment: .leading) {
-                    Text("BoiseITGuru")
-                        .font(.largeTitle)
+                    if fclModel.findName == "" {
+                        Text(fclModel.address)
+                            .font(.title)
+                            .lineLimit(1)
+                    } else {
+                        Text(fclModel.findName)
+                            .font(.title)
+                            .lineLimit(1)
+                    }
                     Text("Some other info probably")
                         .font(.subheadline)
                 }

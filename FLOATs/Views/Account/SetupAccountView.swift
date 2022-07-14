@@ -16,7 +16,7 @@ struct SetupAccountView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(.bottom, 100)
-            if !fclModel.floatSetup {
+            if fclModel.checkingAccount {
                 Text("Please wait while we verify your account is setup properly")
             } else {
                 Text("To get the best results please setup your account before proceeding")

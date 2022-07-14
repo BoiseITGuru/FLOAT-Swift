@@ -18,7 +18,11 @@ import LocalAuthentication
 class FCLModel: NSObject, ObservableObject {
     @Published var floatColorHex = "38e8c6"
     
+    @Published var checkingAccount = true
+    
     @Published var floatSetup = false
+    
+    @Published var findName = ""
     
     @Published var loggedIn = false
     
@@ -180,17 +184,53 @@ class FCLModel: NSObject, ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 if case let .failure(error) = completion {
+                    // TODO: Error Handling
                     print(error)
                 }
             } receiveValue: { block in
                 print(block)
                 self.floatSetup = block.fields?.value.toBool() ?? false
+                self.checkingAccount = false
             }.store(in: &cancellables)
 
         } else {
             // TODO: Error Handling
             print("Error - Not Logged In")
         }
+    }
+    
+    func reverseLookupFIND(address: String) -> String {
+        var findName = ""
+        
+        fcl.query {
+            cadence {
+                """
+                import FIND from 0xFIND
+
+                pub fun main(address: Address) :  String? {
+                    return FIND.reverseLookup(address)
+                }
+                """
+            }
+            
+            arguments {
+                [.address(Flow.Address(hex: address))]
+            }
+
+            gasLimit {
+                1000
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case let .failure(error) = completion {
+                print(error)
+            }
+        } receiveValue: { block in
+            findName = block.fields?.value.toString() ?? ""
+        }.store(in: &cancellables)
+        
+        return findName
     }
 
     func queryFUSD(address: String) {
@@ -238,6 +278,7 @@ class FCLModel: NSObject, ObservableObject {
             } receiveValue: { result in
                 self.address = result.address ?? ""
                 self.defaults.set(self.address, forKey: "address")
+                self.findName = self.reverseLookupFIND(address: self.address)
                 self.loggedIn = true
             }.store(in: &cancellables)
     }
