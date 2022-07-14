@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FLOATsApp: App {
+    @StateObject var fclModel = FCLModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(fclModel)
         }
     }
 }
