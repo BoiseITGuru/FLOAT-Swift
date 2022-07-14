@@ -29,7 +29,7 @@ struct ContentView: View {
                                 Image(systemName: "greetingcard.fill")
                                 Text("Events")
                             }
-                        Text("Groups")
+                        GroupListView()
                             .tabItem {
                                 Image(systemName: "greetingcard.fill")
                                 Text("Groups")

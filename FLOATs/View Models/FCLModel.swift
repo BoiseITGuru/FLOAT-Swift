@@ -63,7 +63,7 @@ class FCLModel: NSObject, ObservableObject {
         }
         """
 
-    let setupAccountTx =
+    private let setupAccountTx =
         """
              import FLOAT from 0xFLOAT
              import NonFungibleToken from 0xCORE
@@ -94,6 +94,27 @@ class FCLModel: NSObject, ObservableObject {
                  log("Finished setting up the account for FLOATs.")
                }
              }
+        """
+    
+    private let addSharedMinterTx =
+        """
+            import GrantedAccountAccess from 0xFLOAT
+            transaction (receiver: Address) {
+                let Info: &GrantedAccountAccess.Info
+
+                prepare(acct: AuthAccount) {
+                  // set up the FLOAT Collection where users will store their FLOATs
+                  if acct.borrow<&GrantedAccountAccess.Info>(from: GrantedAccountAccess.InfoStoragePath) == nil {
+                      acct.save(<- GrantedAccountAccess.createInfo(), to: GrantedAccountAccess.InfoStoragePath)
+                      acct.link<&GrantedAccountAccess.Info{GrantedAccountAccess.InfoPublic}>
+                              (GrantedAccountAccess.InfoPublicPath, target: GrantedAccountAccess.InfoStoragePath)
+                  }
+                  self.Info = acct.borrow<&GrantedAccountAccess.Info>(from: GrantedAccountAccess.InfoStoragePath)!
+                }
+                execute {
+                  self.Info.addAccount(account: receiver)
+                }
+            }
         """
 
     private var cancellables = Set<AnyCancellable>()
@@ -231,6 +252,70 @@ class FCLModel: NSObject, ObservableObject {
         }.store(in: &cancellables)
         
         return findName
+    }
+    
+    func addSharedMinter(address: String) {
+        // TODO: Add Validator to Ensure proper address.
+        
+        fcl.send([
+            .transaction(addSharedMinterTx),
+            .args([.address(Flow.Address(hex: address))]),
+            .limit(1000),
+        ])
+        
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case let .failure(error) = completion {
+                // TODO: Error Handling
+                self.preAuthz = error.localizedDescription
+            }
+        } receiveValue: { txId in
+            // TODO: Setup Success Alert!
+            print("Setup Shared Minter")
+            self.preAuthz = txId
+        }.store(in: &cancellables)
+        
+        print(self.preAuthz)
+    }
+    
+    func getGroups() {
+        fcl.query {
+            cadence {
+                """
+                  import FLOAT from 0xFLOAT
+                  pub fun main(account: Address): {String: &FLOAT.Group} {
+                    let floatEventCollection = getAccount(account).getCapability(FLOAT.FLOATEventsPublicPath)
+                                                .borrow<&FLOAT.FLOATEvents{FLOAT.FLOATEventsPublic}>()
+                                                ?? panic("Could not borrow the FLOAT Events Collection from the account.")
+                    let groups = floatEventCollection.getGroups()
+                  
+                    let answer: {String: &FLOAT.Group} = {}
+                    for groupName in groups {
+                      answer[groupName] = floatEventCollection.getGroup(groupName: groupName)
+                    }
+                  
+                    return answer
+                  }
+                """
+            }
+            
+            arguments {
+                [.address(Flow.Address(hex: address))]
+            }
+
+            gasLimit {
+                1000
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { completion in
+            if case let .failure(error) = completion {
+                print(error)
+            }
+        } receiveValue: { block in
+            self.FUSDBalance = "\(String(block.fields?.value.toUFix64() ?? 0.0)) FUSD"
+            print(block.fields?.value.toDictionary())
+        }.store(in: &cancellables)
     }
 
     func queryFUSD(address: String) {
