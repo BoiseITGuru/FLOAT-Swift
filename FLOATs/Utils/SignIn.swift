@@ -2,7 +2,7 @@
 //  SignIn.swift
 //  Boise's Finest DAO
 //
-//  Created by Brian Pistone on 7/8/22.
+//  Created by BoiseITGuru on 7/8/22.
 //
 
 import SwiftUI

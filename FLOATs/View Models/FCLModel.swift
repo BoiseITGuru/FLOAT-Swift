@@ -2,7 +2,7 @@
 //  FCLModel.swift
 //  Boise's Finest DAO
 //
-//  Created by Brian Pistone on 7/7/22.
+//  Created by BoiseITGuru on 7/7/22.
 //
 
 import BigInt
@@ -23,6 +23,8 @@ class FCLModel: NSObject, ObservableObject {
     @Published var floatSetup = false
     
     @Published var findName = ""
+    
+    @Published var floatGroups: [FloatGroup] = []
     
     @Published var loggedIn = false
     
@@ -279,6 +281,7 @@ class FCLModel: NSObject, ObservableObject {
     }
     
     func getGroups() {
+        self.floatGroups = []
         fcl.query {
             cadence {
                 """
@@ -313,8 +316,49 @@ class FCLModel: NSObject, ObservableObject {
                 print(error)
             }
         } receiveValue: { block in
-            self.FUSDBalance = "\(String(block.fields?.value.toUFix64() ?? 0.0)) FUSD"
-            print(block.fields?.value.toDictionary())
+            let floatGroups = block.fields?.value.toDictionary()
+            floatGroups?.forEach({ group in
+                var id = ""
+                var uuid = ""
+                var name = ""
+                var image = ""
+                var description = ""
+                var groupEvents: [String] = []
+                
+                if let decodedGroup = try? JSONSerialization.jsonObject(with: group.value.jsonData!, options: .fragmentsAllowed) as? [String: Any],
+                   let groupValue = decodedGroup["value"] as? [String: Any],
+                   let groupFields = groupValue["fields"] as? NSArray {
+                    groupFields.forEach { field in
+                        if let jsonArray = try? JSONSerialization.data(withJSONObject: field, options: []) {
+                            if let json = try? JSONSerialization.jsonObject(with: jsonArray, options: .fragmentsAllowed) as? [String: Any] {
+                                let fieldName = json["name"] as? String ?? ""
+                                let fieldValueField = json["value"] as! [String: Any]
+                                let fieldValue = fieldValueField["value"] as? String ?? ""
+                                
+                                switch fieldName {
+                                case "uuid":
+                                    uuid = fieldValue
+                                case "id":
+                                    id = fieldValue
+                                case "name":
+                                    name = fieldValue
+                                case "image":
+                                    image = fieldValue
+                                case "description":
+                                    description = fieldValue
+                                case "events":
+                                    groupEvents.append("Group Events Not Yet Supported")
+                                default:
+                                    print("Not known value")
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                self.floatGroups.append(FloatGroup(id: id, uuid: uuid, name: name, image: image, description: description, events: groupEvents))
+                   
+            })
         }.store(in: &cancellables)
     }
 

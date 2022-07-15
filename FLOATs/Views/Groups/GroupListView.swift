@@ -2,7 +2,7 @@
 //  GroupListView.swift
 //  FLOATs
 //
-//  Created by Brian Pistone on 7/14/22.
+//  Created by BoiseITGuru on 7/14/22.
 //
 
 import SwiftUI
@@ -12,8 +12,8 @@ struct GroupListView: View {
     
     var body: some View {
         VStack {
-            List {
-                
+            List(fclModel.floatGroups, id: \.id) { group in
+                Text(group.name)
             }
             
             Button(action: {  }) {
@@ -27,6 +27,7 @@ struct GroupListView: View {
                             .foregroundColor(Color(hex: fclModel.floatColorHex))
                     )
             }
+            .padding()
         }
         .onAppear {
             fclModel.getGroups()

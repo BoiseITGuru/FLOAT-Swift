@@ -2,7 +2,7 @@
 //  HexColor.swift
 //  Boise's Finest DAO
 //
-//  Created by Brian Pistone on 7/7/22.
+//  Created by BoiseITGuru on 7/7/22.
 //
 
 import SwiftUI
