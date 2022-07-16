@@ -13,26 +13,27 @@ struct GroupListView: View {
     
     var body: some View {
         VStack {
-            List(fclModel.floatGroups, id: \.id) { group in
-                GroupCardView(group: group)
-            }
-            
-            Button(action: { showSheet.toggle() }) {
-                Label("Create A New Group", systemImage: "plus.circle")
-                    .foregroundColor(Color(hex: fclModel.floatColorHex))
-                    .padding(10.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10.0)
-                            .stroke(lineWidth: 2.0)
-                            .shadow(color: Color(hex: fclModel.floatColorHex), radius: 10.0)
-                            .foregroundColor(Color(hex: fclModel.floatColorHex))
-                    )
-            }
-            .padding()
+//            List(fclModel.floatGroups, id: \.id) { group in
+//                GroupCardView(group: group)
+//            }
+//
+//            Button(action: { showSheet.toggle() }) {
+//                Label("Create A New Group", systemImage: "plus.circle")
+//                    .foregroundColor(Color(hex: fclModel.floatColorHex))
+//                    .padding(10.0)
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 10.0)
+//                            .stroke(lineWidth: 2.0)
+//                            .shadow(color: Color(hex: fclModel.floatColorHex), radius: 10.0)
+//                            .foregroundColor(Color(hex: fclModel.floatColorHex))
+//                    )
+//            }
+//            .padding()
+            Text("Needs Updates LOL")
         }
-        .onAppear {
-            fclModel.getGroups()
-        }
+//        .onAppear {
+//            fclModel.getGroups()
+//        }
         .sheet(isPresented: $showSheet) {
             GroupCreateView(showSheet: $showSheet)
         }

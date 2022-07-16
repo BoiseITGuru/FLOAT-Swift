@@ -11,19 +11,20 @@ import Flow
 import BigInt
 import CryptoKit
 
-public let float = FLOAT_Swift_SDK.shared
-
 public class FLOAT_Swift_SDK {
     public static let shared = FLOAT_Swift_SDK()
     private var cancellables = Set<AnyCancellable>()
     private var address: String?
-    
-    public var floatSetup = false
+    private var floatSetup = false
 
     public init() {
         if ((fcl.currentUser?.loggedIn) != nil) {
             address = fcl.currentUser!.addr.hex
         }
+    }
+    
+    public func isSetup() -> Bool {
+        return self.floatSetup
     }
     
     public func setupFloatAccount() async {
@@ -44,7 +45,7 @@ public class FLOAT_Swift_SDK {
         }
     }
     
-    private func floatIsSetup() async {
+    public func floatIsSetup() async {
         if ((fcl.currentUser?.loggedIn) != nil) {
             do {
                 let block = try await fcl.query {
@@ -61,38 +62,15 @@ public class FLOAT_Swift_SDK {
                     }
                 }.decode()
                 await MainActor.run {
-                    print(block)
+                    if let setup = block {
+                        self.floatSetup = setup as? Bool ?? false
+                    }
                 }
             } catch {
                 // TODO: Error Handling
                 print(error)
             }
             
-            fcl.query {
-                cadence {
-                    FloatScripts.isSetup.rawValue
-                }
-                
-                arguments {
-                    [.address(Flow.Address(hex: self.address ?? ""))]
-                }
-                
-                gasLimit {
-                    1000
-                }
-            }
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                if case let .failure(error) = completion {
-                    // TODO: Error Handling
-                    print(error)
-                }
-            } receiveValue: { block in
-                print(block)
-                self.floatSetup = block.fields?.value.toBool() ?? false
-                self.checkingAccount = false
-            }.store(in: &cancellables)
-
         } else {
             // TODO: Error Handling
             print("Error - Not Logged In")

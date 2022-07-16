@@ -6,10 +6,10 @@ import BigInt
 import CryptoKit
 
 public class FIND_Swift_SDK {
-    private var cancellables = Set<AnyCancellable>()
-    
-    private var profile: FINDProfile?
+    public static let shared = FIND_Swift_SDK()
     private var address: String?
+    private var cancellables = Set<AnyCancellable>()
+    public var profile: FINDProfile?
 
     public init() {
         if ((fcl.currentUser?.loggedIn) != nil) {
@@ -17,17 +17,40 @@ public class FIND_Swift_SDK {
         }
     }
     
+    public func checkFindProfile() async {
+        if address != nil {
+            let profile = await reverseLookupProfile(address: address!)
+            print(profile)
+        }
+    }
+    
+    public func reverseLookupProfile(address: String) async -> String {
+        do {
+            let block = try await fcl.query {
+                cadence {
+                    FindScripts.reverseLookupProfile.rawValue
+                }
+                
+                arguments {
+                    [.address(Flow.Address(hex: address))]
+                }
+            }.decode(FINDProfile.self)
+            await MainActor.run {
+                self.profile = block
+            }
+            
+            return ""
+        } catch {
+            print(error)
+            return ""
+        }
+    }
+    
     public func reverseLookupFIND(address: String) async -> String {
         do {
             let block = try await fcl.query {
                 cadence {
-                    """
-                    import FIND, Profile from 0xFIND
-
-                    pub fun main(address: Address) :  String? {
-                        return FIND.reverseLookup(address)
-                    }
-                    """
+                    FindScripts.reverseLookupFIND.rawValue
                 }
             }.decode()
             await MainActor.run {

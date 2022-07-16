@@ -7,11 +7,11 @@
 
 import Foundation
 
-public struct FINDProfile: Hashable {
+public struct FINDProfile: Decodable, Hashable {
     var findName: String
     var name: String
-    var bio: String
+    var description: String
     var tags: [String]
-    var avatarUrl: String
+    var avatar: String
     var links: [String]
 }

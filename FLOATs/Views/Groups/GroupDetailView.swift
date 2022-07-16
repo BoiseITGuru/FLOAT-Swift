@@ -46,8 +46,8 @@ struct GroupDetailView: View {
             }
         }
         .navigationTitle("Group Details")
-        .onAppear {
-            fclModel.getGroupEvents(events: group.events, address: fclModel.address)
-        }
+//        .onAppear {
+//            fclModel.getGroupEvents(events: group.events, address: fclModel.address)
+//        }
     }
 }
