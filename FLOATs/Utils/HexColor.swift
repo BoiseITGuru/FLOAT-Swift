@@ -1,6 +1,6 @@
 //
 //  HexColor.swift
-//  Boise's Finest DAO
+//  FLOATs
 //
 //  Created by BoiseITGuru on 7/7/22.
 //

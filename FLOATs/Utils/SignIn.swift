@@ -1,6 +1,6 @@
 //
 //  SignIn.swift
-//  Boise's Finest DAO
+//  FLOATs
 //
 //  Created by BoiseITGuru on 7/8/22.
 //

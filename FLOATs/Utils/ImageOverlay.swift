@@ -1,6 +1,6 @@
 //
 //  ImageOverlay.swift
-//  Boise's Finest DAO
+//  FLOATs
 //
 //  Created by BoiseITGuru on 7/8/22.
 //
@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ImageOverlay: View {
+    @EnvironmentObject var fclModel: FCLModel
     var text: String
     var font: Font
     
@@ -16,7 +17,7 @@ struct ImageOverlay: View {
             Text(text)
                 .font(font)
                 .padding(6)
-                .foregroundColor(Color(hex: "4bb17b"))
+                .foregroundColor(Color(hex: fclModel.floatColorHex))
         }
             .background(Color.black)
             .opacity(0.8)

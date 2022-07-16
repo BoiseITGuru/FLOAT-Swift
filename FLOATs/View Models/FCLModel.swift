@@ -1,6 +1,6 @@
 //
 //  FCLModel.swift
-//  Boise's Finest DAO
+//  FLOATs
 //
 //  Created by BoiseITGuru on 7/7/22.
 //
@@ -126,11 +126,11 @@ class FCLModel: NSObject, ObservableObject {
     override init() {
         super.init()
         fcl.config
-            .put(.title, value: "Boise's Finest DAO")
+            .put(.title, value: "FLOATs")
             .put(.wallet, value: "https://fcl-discovery.onflow.org/testnet/authn")
             .put(.accessNode, value: "https://access-testnet.onflow.org")
             .put(.authn, value: provider.endpoint)
-            .put(.location, value: "https://BoisesFinestDAO.app")
+            .put(.location, value: "https://floats.city")
             .put(.env, value: "testnet")
             .put(.scope, value: "email")
 
@@ -141,7 +141,7 @@ class FCLModel: NSObject, ObservableObject {
             .put("0xFLOWTOKEN", value: "0x7e60df042a9c0868")
             .put("0xFUNGIBLETOKEN", value: "0x9a0766d93b6608b7")
             .put("0xFN", value: "0x0afe396ebc8eee65")
-            .put("0xFIND", value: "0xa16ab1d0abde3625")
+            .put("0xFIND", value: "0x35717efbbce11c74")
             .put("0xFLOWSTORAGEFEES", value: "0x8c5303eaa26202d6")
     }
 
@@ -222,13 +222,11 @@ class FCLModel: NSObject, ObservableObject {
         }
     }
     
-    func reverseLookupFIND(address: String) -> String {
-        var findName = ""
-        
+    func reverseLookupFIND(address: String) {
         fcl.query {
             cadence {
                 """
-                import FIND from 0xFIND
+                import FIND, Profile from 0xFIND
 
                 pub fun main(address: Address) :  String? {
                     return FIND.reverseLookup(address)
@@ -250,10 +248,12 @@ class FCLModel: NSObject, ObservableObject {
                 print(error)
             }
         } receiveValue: { block in
-            findName = block.fields?.value.toString() ?? ""
+            let find = block.fields?.value.toOptional()
+            if let decodedFind = try? JSONSerialization.jsonObject(with: (find?.jsonData!)!, options: .fragmentsAllowed) as? [String: Any],
+               let decodedFindValue = decodedFind["value"] as? String {
+                self.findName = decodedFindValue
+            }
         }.store(in: &cancellables)
-        
-        return findName
     }
     
     func addSharedMinter(address: String) {
@@ -347,7 +347,20 @@ class FCLModel: NSObject, ObservableObject {
                                 case "description":
                                     description = fieldValue
                                 case "events":
-                                    groupEvents.append("Group Events Not Yet Supported")
+                                    let events = fieldValueField["value"] as? NSArray ?? []
+                                    events.forEach { event in
+                                        if let eventArray = try? JSONSerialization.data(withJSONObject: event, options: []) {
+                                            if let eventJSON = try? JSONSerialization.jsonObject(with: eventArray, options: .fragmentsAllowed) as? [String: Any],
+                                               let keyJSON = eventJSON["key"] as? [String: Any],
+                                               let eventID = keyJSON["value"] as? String,
+                                               let valueJSON = eventJSON["value"] as? [String: Any],
+                                               let eventInGroup = valueJSON["value"] as? Int {
+                                                if eventInGroup == 1 {
+                                                    groupEvents.append(eventID)
+                                                }
+                                            }
+                                        }
+                                    }
                                 default:
                                     print("Not known value")
                                 }
@@ -360,6 +373,151 @@ class FCLModel: NSObject, ObservableObject {
                    
             })
         }.store(in: &cancellables)
+    }
+    
+    func getGroupEvents(events: [String], address: String) {
+        events.forEach { event in
+            fcl.query {
+                cadence {
+                    """
+                      import FLOAT from 0xFLOAT
+                      pub fun main(account: Address, eventId: UInt64): FLOATEventMetadata {
+                        let floatEventCollection = getAccount(account).getCapability(FLOAT.FLOATEventsPublicPath)
+                                                    .borrow<&FLOAT.FLOATEvents{FLOAT.FLOATEventsPublic}>()
+                                                    ?? panic("Could not borrow the FLOAT Events Collection from the account.")
+                        let event = floatEventCollection.borrowPublicEventRef(eventId: eventId) ?? panic("This event does not exist in the account")
+                        return FLOATEventMetadata(
+                          _claimable: event.claimable,
+                          _dateCreated: event.dateCreated,
+                          _description: event.description,
+                          _eventId: event.eventId,
+                          _extraMetadata: event.getExtraMetadata(),
+                          _groups: event.getGroups(),
+                          _host: event.host,
+                          _image: event.image,
+                          _name: event.name,
+                          _totalSupply: event.totalSupply,
+                          _transferrable: event.transferrable,
+                          _url: event.url,
+                          _verifiers: event.getVerifiers()
+                        )
+                      }
+                      pub struct FLOATEventMetadata {
+                        pub let claimable: Bool
+                        pub let dateCreated: UFix64
+                        pub let description: String
+                        pub let eventId: UInt64
+                        pub let extraMetadata: {String: AnyStruct}
+                        pub let groups: [String]
+                        pub let host: Address
+                        pub let image: String
+                        pub let name: String
+                        pub let totalSupply: UInt64
+                        pub let transferrable: Bool
+                        pub let url: String
+                        pub let verifiers: {String: [{FLOAT.IVerifier}]}
+                        init(
+                            _claimable: Bool,
+                            _dateCreated: UFix64,
+                            _description: String,
+                            _eventId: UInt64,
+                            _extraMetadata: {String: AnyStruct},
+                            _groups: [String],
+                            _host: Address,
+                            _image: String,
+                            _name: String,
+                            _totalSupply: UInt64,
+                            _transferrable: Bool,
+                            _url: String,
+                            _verifiers: {String: [{FLOAT.IVerifier}]}
+                        ) {
+                            self.claimable = _claimable
+                            self.dateCreated = _dateCreated
+                            self.description = _description
+                            self.eventId = _eventId
+                            self.extraMetadata = _extraMetadata
+                            self.groups = _groups
+                            self.host = _host
+                            self.image = _image
+                            self.name = _name
+                            self.transferrable = _transferrable
+                            self.totalSupply = _totalSupply
+                            self.url = _url
+                            self.verifiers = _verifiers
+                        }
+                      }
+                    """
+                }
+                
+                arguments {
+                    [.address(Flow.Address(hex: address)), .uint64(UInt64(event) ?? 0)]
+                }
+
+                gasLimit {
+                    1000
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case let .failure(error) = completion {
+                    print(error)
+                }
+            } receiveValue: { block in
+                let groupEvents = block.fields?.jsonData
+                if let decodedEvent = try? JSONSerialization.jsonObject(with: groupEvents!, options: .fragmentsAllowed) as? [String: Any],
+                   let eventValue = decodedEvent["value"] as? [String: Any],
+                   let eventFields = eventValue["fields"] as? NSArray {
+                    var claimable = false
+                    var dateCreated = ""
+                    var description = ""
+                    var eventId = ""
+                    var groups: NSDictionary = [:]
+                    var host = ""
+                    var image = ""
+                    var name = ""
+                    var totalSupply = ""
+                    var transferrable = false
+                    var url = ""
+                    
+                    eventFields.forEach { field in
+                        if let eventArray = try? JSONSerialization.data(withJSONObject: field, options: []) {
+                            if let eventJSON = try? JSONSerialization.jsonObject(with: eventArray, options: .fragmentsAllowed) as? [String: Any],
+                               let fieldName = eventJSON["name"] as? String,
+                               let fieldValue = eventJSON["value"] as? [String: Any] {
+                                switch fieldName {
+                                case "claimable":
+                                    claimable = fieldValue["value"] as! Bool
+                                case "dateCreated":
+                                    dateCreated = fieldValue["value"] as! String
+                                case "description":
+                                    description = fieldValue["value"] as! String
+                                case "eventId":
+                                    eventId = fieldValue["value"] as! String
+                                case "groups":
+                                    print("Do Nothing")
+                                case "host":
+                                    host = fieldValue["value"] as! String
+                                case "image":
+                                    image = fieldValue["value"] as! String
+                                case "name":
+                                    name = fieldValue["value"] as! String
+                                case "totalSupply":
+                                    totalSupply = fieldValue["value"] as! String
+                                case "transferrable":
+                                    transferrable = fieldValue["value"] as! Bool
+                                case "urL":
+                                    url = fieldValue["url"] as! String
+                                default:
+                                    print("Do Nothing")
+                                }
+                            }
+                        }
+                    }
+                    
+                    print(FLOATEventMetadata(claimable: claimable, dateCreated: dateCreated, description: description, eventId: eventId, host: host, image: image, name: name, totalSupply: totalSupply, transferrable: transferrable, url: url))
+                }
+            }.store(in: &cancellables)
+        }
     }
 
     func queryFUSD(address: String) {
@@ -407,7 +565,7 @@ class FCLModel: NSObject, ObservableObject {
             } receiveValue: { result in
                 self.address = result.address ?? ""
                 self.defaults.set(self.address, forKey: "address")
-                self.findName = self.reverseLookupFIND(address: self.address)
+                self.reverseLookupFIND(address: self.address)
                 self.loggedIn = true
             }.store(in: &cancellables)
     }

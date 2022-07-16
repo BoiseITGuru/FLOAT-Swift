@@ -42,6 +42,7 @@ struct ContentView: View {
                     }
                     .accentColor(Color(hex: fclModel.floatColorHex))
                     .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("FLOATs")
                 }
             }
         }

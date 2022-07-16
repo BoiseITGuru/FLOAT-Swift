@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct GroupCardView: View {
+    let group: FloatGroup
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct GroupCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupCardView()
+        NavigationLink(destination: GroupDetailView(group: group)) {
+            HStack {
+                AsyncImage(url: URL(string: "https://ipfs.infura.io/ipfs/\(group.image)"), scale: 2) { image in
+                    image
+                      .resizable()
+                      .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                }
+                    .frame(width: 50, height: 50)
+                Text(group.name)
+            }
+        }
     }
 }

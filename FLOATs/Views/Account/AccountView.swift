@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  Boise's Finest DAO
+//  FLOATs
 //
 //  Created by BoiseITGuru on 7/7/22.
 //
@@ -25,7 +25,7 @@ struct AccountView: View {
                                 .font(.title)
                                 .lineLimit(1)
                         } else {
-                            Text(fclModel.findName)
+                            Text("\(fclModel.findName).find")
                                 .font(.title)
                                 .lineLimit(1)
                         }
@@ -45,6 +45,10 @@ struct AccountView: View {
                 Button(action: { fclModel.addSharedMinter(address: sharedMinter) }) {
                     Text("Add Shared Minter")
                 }
+                Text("BEWARE: Anyone with access to the address above will be able to control this account on FLOAT.")
+                    .multilineTextAlignment(.center)
+                    .font(.subheadline)
+                    .foregroundColor(Color.red)
             }
         }
     }

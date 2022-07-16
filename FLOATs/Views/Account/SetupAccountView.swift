@@ -15,11 +15,17 @@ struct SetupAccountView: View {
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .padding(.bottom, 100)
+                .padding(.bottom, 50)
             if fclModel.checkingAccount {
                 Text("Please wait while we verify your account is setup properly")
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+                    .padding(20)
             } else {
                 Text("To get the best results please setup your account before proceeding")
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+                    .padding(10)
                 Button(action: { fclModel.setupFloatAccount() }) {
                     Label("Setup Account", systemImage: "person")
                         .foregroundColor(Color(hex: fclModel.floatColorHex))

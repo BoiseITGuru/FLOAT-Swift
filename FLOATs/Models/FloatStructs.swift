@@ -15,3 +15,16 @@ struct FloatGroup: Decodable, Hashable {
     let description: String
     let events: [String]
 }
+
+struct FLOATEventMetadata {
+    let claimable: Bool
+    let dateCreated: String
+    let description: String
+    let eventId: String
+    let host: String
+    let image: String
+    let name: String
+    let totalSupply: String
+    let transferrable: Bool
+    let url: String
+}

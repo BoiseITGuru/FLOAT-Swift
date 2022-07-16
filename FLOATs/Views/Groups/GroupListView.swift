@@ -9,14 +9,15 @@ import SwiftUI
 
 struct GroupListView: View {
     @EnvironmentObject var fclModel: FCLModel
+    @State var showSheet = false
     
     var body: some View {
         VStack {
             List(fclModel.floatGroups, id: \.id) { group in
-                Text(group.name)
+                GroupCardView(group: group)
             }
             
-            Button(action: {  }) {
+            Button(action: { showSheet.toggle() }) {
                 Label("Create A New Group", systemImage: "plus.circle")
                     .foregroundColor(Color(hex: fclModel.floatColorHex))
                     .padding(10.0)
@@ -31,6 +32,9 @@ struct GroupListView: View {
         }
         .onAppear {
             fclModel.getGroups()
+        }
+        .sheet(isPresented: $showSheet) {
+            GroupCreateView(showSheet: $showSheet)
         }
     }
 }
