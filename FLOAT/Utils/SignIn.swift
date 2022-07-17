@@ -32,7 +32,7 @@ struct SignIn: View {
             Form {
                 Picker("Wallet Provider", selection: $fclModel.provider, content: {
                     Text("Dapper").tag(FCLProvider.dapper)
-                    Text("Blocoto").tag(FCLProvider.blocto)
+                    Text("Blocto").tag(FCLProvider.blocto)
                 }).onChange(of: fclModel.provider, perform: { _ in
                     fclModel.changeWallet()
                 })

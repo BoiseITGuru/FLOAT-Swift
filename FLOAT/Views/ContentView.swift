@@ -21,7 +21,7 @@ struct ContentView: View {
                             Image(systemName: "greetingcard.fill")
                             Text("FLOATs")
                         }
-                    Text("Events")
+                    EventsListView()
                         .tabItem {
                             Image(systemName: "greetingcard.fill")
                             Text("Events")

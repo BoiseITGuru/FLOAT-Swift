@@ -19,6 +19,7 @@ public class FLOAT_Swift_SDK {
     private var cancellables = Set<AnyCancellable>()
     private var floatSetup = false
     public var groups: [FloatGroup] = []
+    public var events: [FLOATEventMetadata] = []
 
     public init() {
 
@@ -123,10 +124,11 @@ public class FLOAT_Swift_SDK {
                         }
                     }.decode()
                     await MainActor.run {
+                        // TODO: Figure out why decode not working properly for this
+                        // TODO: Figure out why group events are not returning
                         if let floatGroups = block as? [String: Any] {
                             floatGroups.forEach { (_: String, value: Any) in
                                if let group = value as? [String: Any] {
-                                   print(group["events"])
                                    self.groups.append(FloatGroup(id: group["id"] as? UInt64 ?? 0, uuid: group["uuid"] as? UInt64 ?? 0, name: group["name"] as? String ?? "", image: group["image"] as? String ?? "", description: group["description"] as? String ?? "", events: group["events"] as? [String] ?? []))
                                 }
                             }
@@ -137,6 +139,42 @@ public class FLOAT_Swift_SDK {
                     print(error)
                 }
             }
+        }
+    }
+    
+    public func getEvents() async {
+        if (fcl.currentUser != nil) {
+            if fcl.currentUser!.loggedIn {
+                do {
+                    let block = try await fcl.query {
+                        cadence {
+                            FloatScripts.getEvents.rawValue
+                        }
+
+                        arguments {
+                            [.address(fcl.currentUser!.addr)]
+                        }
+
+                        gasLimit {
+                            1000
+                        }
+                    }.decode()
+                    await MainActor.run {
+                        if let eventsDict = block as? [String: Any] {
+                            print(eventsDict)
+                        }
+                    }
+                } catch {
+                    // TODO: Error Handling
+                    print(error)
+                }
+            } else {
+                // TODO: Error Handling
+                print("Error - Not Logged In")
+            }
+        } else {
+            // TODO: Error Handling
+            print("Error - Not Logged In")
         }
     }
 }

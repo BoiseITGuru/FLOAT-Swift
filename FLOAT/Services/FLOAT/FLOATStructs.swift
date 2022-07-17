@@ -16,7 +16,7 @@ public struct FloatGroup: Decodable, Hashable, Identifiable {
     public let events: [String]
 }
 
-public struct FLOATEventMetadata {
+public struct FLOATEventMetadata: Decodable, Hashable, Identifiable {
     public let claimable: Bool
     public let dateCreated: String
     public let description: String
@@ -27,4 +27,5 @@ public struct FLOATEventMetadata {
     public let totalSupply: String
     public let transferrable: Bool
     public let url: String
+    public let id: String
 }
