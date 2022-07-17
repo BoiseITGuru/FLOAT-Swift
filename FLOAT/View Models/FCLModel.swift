@@ -14,6 +14,7 @@ import Foundation
 import SafariServices
 import SwiftUI
 import LocalAuthentication
+import FindSwiftSDK
 
 class FCLModel: NSObject, ObservableObject {
     @Published var defaultColorHex = "38e8c6"
