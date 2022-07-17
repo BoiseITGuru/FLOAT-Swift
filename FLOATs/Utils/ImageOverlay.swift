@@ -11,13 +11,13 @@ struct ImageOverlay: View {
     @EnvironmentObject var fclModel: FCLModel
     var text: String
     var font: Font
-    
+
     var body: some View {
         ZStack {
             Text(text)
                 .font(font)
                 .padding(6)
-                .foregroundColor(Color(hex: fclModel.floatColorHex))
+                .foregroundColor(Color(hex: fclModel.defaultColorHex))
         }
             .background(Color.black)
             .opacity(0.8)

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct GroupDetailView: View {
     @EnvironmentObject var fclModel: FCLModel
-    
+
     @State var group: FloatGroup
     @State var isLoading = true
     @State var loadingMsg = "Please wait while we fetch the events for this group"
-    
+
     var body: some View {
         VStack {
             if let groupImage = group.image {
@@ -40,14 +40,18 @@ struct GroupDetailView: View {
                     .lineLimit(3)
                     .padding(.bottom)
             }
-            
+
+            Text(group.description)
+                .font(.body)
+                .padding()
+
             List(group.events, id:\.self) { event in
                 Text(event)
             }
         }
         .navigationTitle("Group Details")
-        .onAppear {
-            fclModel.getGroupEvents(events: group.events, address: fclModel.address)
-        }
+//        .onAppear {
+//            fclModel.getGroupEvents(events: group.events, address: fclModel.address)
+//        }
     }
 }
