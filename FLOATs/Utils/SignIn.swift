@@ -10,7 +10,7 @@ import FCL
 
 struct SignIn: View {
     @EnvironmentObject var fclModel: FCLModel
-    
+
     var body: some View {
         VStack {
             Image("logo")

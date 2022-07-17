@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var fclModel: FCLModel
-    
+
     var body: some View {
         NavigationView {
             if !fclModel.loggedIn {

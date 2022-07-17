@@ -11,7 +11,7 @@ struct AccountView: View {
     @EnvironmentObject var fclModel: FCLModel
     @State var sharedMinter = ""
     @State var showFINDProfile = false
-    
+
     var body: some View {
         List {
             Section(header: Text("Account - FIND Profile")) {
@@ -45,7 +45,7 @@ struct AccountView: View {
                     Text("Sign Out")
                 }
             }
-            
+
             if !fclModel.FLOAT.isSetup() {
                 Section("Setup Account") {
                     Text("Before you can use the FLOAT Platform or receive any FLOATs your account must be setup")
@@ -54,7 +54,7 @@ struct AccountView: View {
                     }
                 }
             }
-            
+
             Section(header: Text("Shared Minting")) {
                 Text("Share this account with another address and allow them to create events on your behalf. Add an address below and click on 'Add Shared Minter'. Do at your own risk!")
                 TextField("0x00000000000", text: $sharedMinter)

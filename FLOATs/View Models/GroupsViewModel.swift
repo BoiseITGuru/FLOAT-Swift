@@ -10,10 +10,10 @@ import SwiftUI
 
 class GroupsViewModel: ObservableObject {
     @Published var groups: [FloatGroup] = []
-    
+
     func getGroups() async {
         await float.getGroups()
-        
+
         await MainActor.run {
             groups = float.groups
         }
