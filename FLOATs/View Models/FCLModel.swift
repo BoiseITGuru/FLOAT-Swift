@@ -18,9 +18,9 @@ import LocalAuthentication
 class FCLModel: NSObject, ObservableObject {
     @Published var defaultColorHex = "38e8c6"
     
-    @Published var FLOAT: FLOAT_Swift_SDK?
+    @Published var FLOAT = float
     
-    @Published var FIND: FIND_Swift_SDK?
+    @Published var FIND = find
     
     @Published var env: Flow.ChainID = .testnet
     
@@ -75,11 +75,8 @@ class FCLModel: NSObject, ObservableObject {
                 }
             }
             
-            self.FLOAT = FLOAT_Swift_SDK.shared
-            self.FIND = FIND_Swift_SDK.shared
-            
-            await self.FLOAT?.floatIsSetup()
-            await self.FIND?.checkFindProfile()
+            await self.FLOAT.floatIsSetup()
+            await self.FIND.checkFindProfile()
         } catch {
             // TODO: Error handling
             print(error)

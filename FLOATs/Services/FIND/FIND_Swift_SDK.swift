@@ -5,22 +5,22 @@ import Flow
 import BigInt
 import CryptoKit
 
+public let find = FIND_Swift_SDK.shared
+
 public class FIND_Swift_SDK {
     public static let shared = FIND_Swift_SDK()
-    private var address: String?
-    private var cancellables = Set<AnyCancellable>()
     public var profile: FINDProfile?
 
     public init() {
-        if ((fcl.currentUser?.loggedIn) != nil) {
-            address = fcl.currentUser!.addr.hex
-        }
+       
     }
     
     public func checkFindProfile() async {
-        if address != nil {
-            let profile = await reverseLookupProfile(address: address!)
-            print(profile)
+        if fcl.currentUser != nil {
+            if fcl.currentUser!.loggedIn {
+                let profile = await reverseLookupProfile(address: fcl.currentUser!.addr.hex)
+                print(profile)
+            }
         }
     }
     

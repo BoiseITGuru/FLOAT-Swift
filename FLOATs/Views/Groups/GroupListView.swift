@@ -9,31 +9,34 @@ import SwiftUI
 
 struct GroupListView: View {
     @EnvironmentObject var fclModel: FCLModel
+    @ObservedObject var groups = GroupsViewModel()
+    
     @State var showSheet = false
     
     var body: some View {
         VStack {
-//            List(fclModel.floatGroups, id: \.id) { group in
-//                GroupCardView(group: group)
-//            }
-//
-//            Button(action: { showSheet.toggle() }) {
-//                Label("Create A New Group", systemImage: "plus.circle")
-//                    .foregroundColor(Color(hex: fclModel.floatColorHex))
-//                    .padding(10.0)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 10.0)
-//                            .stroke(lineWidth: 2.0)
-//                            .shadow(color: Color(hex: fclModel.floatColorHex), radius: 10.0)
-//                            .foregroundColor(Color(hex: fclModel.floatColorHex))
-//                    )
-//            }
-//            .padding()
-            Text("Needs Updates LOL")
+            List(fclModel.FLOAT.groups) { group in
+                GroupCardView(group: group)
+            }
+
+            Button(action: { showSheet.toggle() }) {
+                Label("Create A New Group", systemImage: "plus.circle")
+                    .foregroundColor(Color(hex: fclModel.defaultColorHex))
+                    .padding(10.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .stroke(lineWidth: 2.0)
+                            .shadow(color: Color(hex: fclModel.defaultColorHex), radius: 10.0)
+                            .foregroundColor(Color(hex: fclModel.defaultColorHex))
+                    )
+            }
+            .padding()
         }
-//        .onAppear {
-//            fclModel.getGroups()
-//        }
+        .onAppear {
+            Task {
+                await groups.getGroups()
+            }
+        }
         .sheet(isPresented: $showSheet) {
             GroupCreateView(showSheet: $showSheet)
         }

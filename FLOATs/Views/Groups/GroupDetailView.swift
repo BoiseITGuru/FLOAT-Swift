@@ -41,6 +41,10 @@ struct GroupDetailView: View {
                     .padding(.bottom)
             }
             
+            Text(group.description)
+                .font(.body)
+                .padding()
+            
             List(group.events, id:\.self) { event in
                 Text(event)
             }

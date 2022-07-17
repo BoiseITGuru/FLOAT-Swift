@@ -10,17 +10,18 @@ import FCL
 import Flow
 import BigInt
 import CryptoKit
+import SwiftUI
+
+public let float = FLOAT_Swift_SDK.shared
 
 public class FLOAT_Swift_SDK {
     public static let shared = FLOAT_Swift_SDK()
     private var cancellables = Set<AnyCancellable>()
-    private var address: String?
     private var floatSetup = false
+    public var groups: [FloatGroup] = []
 
     public init() {
-        if ((fcl.currentUser?.loggedIn) != nil) {
-            address = fcl.currentUser!.addr.hex
-        }
+        
     }
     
     public func isSetup() -> Bool {
@@ -46,34 +47,96 @@ public class FLOAT_Swift_SDK {
     }
     
     public func floatIsSetup() async {
-        if ((fcl.currentUser?.loggedIn) != nil) {
-            do {
-                let block = try await fcl.query {
-                    cadence {
-                        FloatScripts.isSetup.rawValue
+        if (fcl.currentUser != nil) {
+            if fcl.currentUser!.loggedIn {
+                do {
+                    let block = try await fcl.query {
+                        cadence {
+                            FloatScripts.isSetup.rawValue
+                        }
+                        
+                        arguments {
+                            [.address(fcl.currentUser!.addr)]
+                        }
+                        
+                        gasLimit {
+                            1000
+                        }
+                    }.decode()
+                    await MainActor.run {
+                        if let setup = block {
+                            self.floatSetup = setup as? Bool ?? false
+                        }
                     }
-                    
-                    arguments {
-                        [.address(Flow.Address(hex: self.address ?? ""))]
-                    }
-                    
-                    gasLimit {
-                        1000
-                    }
-                }.decode()
-                await MainActor.run {
-                    if let setup = block {
-                        self.floatSetup = setup as? Bool ?? false
-                    }
+                } catch {
+                    // TODO: Error Handling
+                    print(error)
                 }
-            } catch {
+            } else {
                 // TODO: Error Handling
-                print(error)
+                print("Error - Not Logged In")
             }
-            
         } else {
             // TODO: Error Handling
             print("Error - Not Logged In")
+        }
+    }
+    
+    public func addSharedMinter(address: String) async {
+        // TODO: Add Validator to Ensure proper address.
+        
+        do {
+            let txId = try await fcl.send([
+                .transaction(FloatTransactions.addSharedMinter.rawValue),
+                .args([.address(Flow.Address(hex: address))]),
+                .limit(1000),
+            ]).hex
+            await MainActor.run {
+                // TODO: Setup Success Alert!
+                print("Setup Shared Minter")
+                
+                // TODO: Transaction Monitoring
+                print(txId)
+            }
+        } catch {
+            // TODO: Error Handling
+            print(error)
+        }
+    }
+    
+    public func getGroups() async {
+        if fcl.currentUser != nil {
+            if fcl.currentUser!.loggedIn {
+                self.groups = []
+                do {
+                    let block = try await fcl.query {
+                        cadence {
+                            FloatScripts.getGroups.rawValue
+                        }
+                        
+                        arguments {
+                            [.address(fcl.currentUser!.addr)]
+                        }
+                        
+                        gasLimit {
+                            1000
+                        }
+                    }.decode()
+                    await MainActor.run {
+                        if let floatGroups = block as? [String: Any] {
+                            floatGroups.forEach { (key: String, value: Any) in
+                               if let group = value as? [String: Any] {
+                                   print(group["events"])
+                                   self.groups.append(FloatGroup(id: group["id"] as? UInt64 ?? 0, uuid: group["uuid"] as? UInt64 ?? 0, name: group["name"] as? String ?? "", image: group["image"] as? String ?? "", description: group["description"] as? String ?? "", events: group["events"] as? [String] ?? []))
+                                }
+                            }
+                        }
+                    }
+                } catch {
+                    // TODO: Error Handling
+                    print(error)
+                }
+            }
         }
     }
 }
