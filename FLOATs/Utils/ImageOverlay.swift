@@ -11,7 +11,7 @@ struct ImageOverlay: View {
     @EnvironmentObject var fclModel: FCLModel
     var text: String
     var font: Font
-    
+
     var body: some View {
         ZStack {
             Text(text)

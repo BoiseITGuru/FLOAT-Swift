@@ -10,9 +10,9 @@ import SwiftUI
 struct GroupListView: View {
     @EnvironmentObject var fclModel: FCLModel
     @ObservedObject var groups = GroupsViewModel()
-    
+
     @State var showSheet = false
-    
+
     var body: some View {
         VStack {
             List(fclModel.FLOAT.groups) { group in

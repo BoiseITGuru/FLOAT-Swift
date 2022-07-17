@@ -12,9 +12,9 @@ public class FIND_Swift_SDK {
     public var profile: FINDProfile?
 
     public init() {
-       
+
     }
-    
+
     public func checkFindProfile() async {
         if fcl.currentUser != nil {
             if fcl.currentUser!.loggedIn {
@@ -23,14 +23,14 @@ public class FIND_Swift_SDK {
             }
         }
     }
-    
+
     public func reverseLookupProfile(address: String) async -> String {
         do {
             let block = try await fcl.query {
                 cadence {
                     FindScripts.reverseLookupProfile.rawValue
                 }
-                
+
                 arguments {
                     [.address(Flow.Address(hex: address))]
                 }
@@ -38,14 +38,14 @@ public class FIND_Swift_SDK {
             await MainActor.run {
                 self.profile = block
             }
-            
+
             return ""
         } catch {
             print(error)
             return ""
         }
     }
-    
+
     public func reverseLookupFIND(address: String) async -> String {
         do {
             let block = try await fcl.query {
@@ -56,7 +56,7 @@ public class FIND_Swift_SDK {
             await MainActor.run {
                 print(block)
             }
-            
+
             return ""
         } catch {
             print(error)

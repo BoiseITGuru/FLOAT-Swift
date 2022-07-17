@@ -21,13 +21,13 @@ public class FLOAT_Swift_SDK {
     public var groups: [FloatGroup] = []
 
     public init() {
-        
+
     }
-    
+
     public func isSetup() -> Bool {
         return self.floatSetup
     }
-    
+
     public func setupFloatAccount() async {
         do {
             let txId = try await fcl.send([
@@ -36,7 +36,7 @@ public class FLOAT_Swift_SDK {
             ]).hex
             await MainActor.run {
                 self.floatSetup = true
-                
+
                 // TODO: Transaction Monitoring
                 print(txId)
             }
@@ -45,7 +45,7 @@ public class FLOAT_Swift_SDK {
             print(error)
         }
     }
-    
+
     public func floatIsSetup() async {
         if (fcl.currentUser != nil) {
             if fcl.currentUser!.loggedIn {
@@ -54,11 +54,11 @@ public class FLOAT_Swift_SDK {
                         cadence {
                             FloatScripts.isSetup.rawValue
                         }
-                        
+
                         arguments {
                             [.address(fcl.currentUser!.addr)]
                         }
-                        
+
                         gasLimit {
                             1000
                         }
@@ -81,10 +81,10 @@ public class FLOAT_Swift_SDK {
             print("Error - Not Logged In")
         }
     }
-    
+
     public func addSharedMinter(address: String) async {
         // TODO: Add Validator to Ensure proper address.
-        
+
         do {
             let txId = try await fcl.send([
                 .transaction(FloatTransactions.addSharedMinter.rawValue),
@@ -94,7 +94,7 @@ public class FLOAT_Swift_SDK {
             await MainActor.run {
                 // TODO: Setup Success Alert!
                 print("Setup Shared Minter")
-                
+
                 // TODO: Transaction Monitoring
                 print(txId)
             }
@@ -103,7 +103,7 @@ public class FLOAT_Swift_SDK {
             print(error)
         }
     }
-    
+
     public func getGroups() async {
         if fcl.currentUser != nil {
             if fcl.currentUser!.loggedIn {
@@ -113,11 +113,11 @@ public class FLOAT_Swift_SDK {
                         cadence {
                             FloatScripts.getGroups.rawValue
                         }
-                        
+
                         arguments {
                             [.address(fcl.currentUser!.addr)]
                         }
-                        
+
                         gasLimit {
                             1000
                         }

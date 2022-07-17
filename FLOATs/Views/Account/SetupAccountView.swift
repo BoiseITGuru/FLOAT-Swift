@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SetupAccountView: View {
     @EnvironmentObject var fclModel: FCLModel
-    
+
     var body: some View {
         VStack {
             Image("logo")

@@ -17,15 +17,15 @@ import LocalAuthentication
 
 class FCLModel: NSObject, ObservableObject {
     @Published var defaultColorHex = "38e8c6"
-    
+
     @Published var FLOAT = float
-    
+
     @Published var FIND = find
-    
+
     @Published var env: Flow.ChainID = .testnet
-    
+
     @Published var loggedIn = false
-    
+
     @Published var address: String = ""
 
     @Published var provider: FCLProvider = .blocto
@@ -38,13 +38,13 @@ class FCLModel: NSObject, ObservableObject {
     @Published var currentObject: String = ""
 
     private var cancellables = Set<AnyCancellable>()
-    
+
     let defaults = UserDefaults.standard
 
     override init() {
         super.init()
         let metadata = FCL.Metadata(appName: "FLOATs", appIcon: "https://placekitten.com/g/200/200", location: "https://floats.city")
-        
+
         fcl.config(metadata: metadata, env: env, provider: provider)
 
         fcl.config
@@ -68,13 +68,13 @@ class FCLModel: NSObject, ObservableObject {
             let result = try await fcl.authenticate()
             await MainActor.run {
                 self.address = result.address ?? ""
-                
+
                 if self.address != "" {
                     self.defaults.set(self.address, forKey: "address")
                     self.loggedIn = true
                 }
             }
-            
+
             await self.FLOAT.floatIsSetup()
             await self.FIND.checkFindProfile()
         } catch {
@@ -82,7 +82,7 @@ class FCLModel: NSObject, ObservableObject {
             print(error)
         }
     }
-    
+
 //    func faceIdAuth() {
 //        let context = LAContext()
 //        var error: NSError?
@@ -110,7 +110,7 @@ class FCLModel: NSObject, ObservableObject {
 //            }
 //        }
 //    }
-    
+
     func signOut() {
         self.defaults.removeObject(forKey: "address")
         self.address = ""
