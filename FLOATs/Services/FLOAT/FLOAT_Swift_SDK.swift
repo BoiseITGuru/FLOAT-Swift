@@ -124,7 +124,7 @@ public class FLOAT_Swift_SDK {
                     }.decode()
                     await MainActor.run {
                         if let floatGroups = block as? [String: Any] {
-                            floatGroups.forEach { (key: String, value: Any) in
+                            floatGroups.forEach { (_: String, value: Any) in
                                if let group = value as? [String: Any] {
                                    print(group["events"])
                                    self.groups.append(FloatGroup(id: group["id"] as? UInt64 ?? 0, uuid: group["uuid"] as? UInt64 ?? 0, name: group["name"] as? String ?? "", image: group["image"] as? String ?? "", description: group["description"] as? String ?? "", events: group["events"] as? [String] ?? []))
