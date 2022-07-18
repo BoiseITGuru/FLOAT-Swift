@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FLOATSwiftSDK
 
 struct GroupDetailView: View {
     @EnvironmentObject var fclModel: FCLModel

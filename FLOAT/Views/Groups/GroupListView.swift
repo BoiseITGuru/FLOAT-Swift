@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
+import FLOATSwiftSDK
 
 struct GroupListView: View {
     @EnvironmentObject var fclModel: FCLModel
     @ObservedObject var groups = GroupsViewModel()
-
     @State var showSheet = false
 
     var body: some View {
         VStack {
-            List(fclModel.FLOAT.groups) { group in
+            List(float.groups) { group in
                 GroupCardView(group: group)
+            }.refreshable {
+                await groups.getGroups()
             }
 
             Button(action: { showSheet.toggle() }) {
@@ -31,11 +33,6 @@ struct GroupListView: View {
                     )
             }
             .padding()
-        }
-        .onAppear {
-            Task {
-                await groups.getGroups()
-            }
         }
         .sheet(isPresented: $showSheet) {
             GroupCreateView(showSheet: $showSheet)

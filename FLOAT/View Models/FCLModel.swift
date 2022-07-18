@@ -14,14 +14,9 @@ import Foundation
 import SafariServices
 import SwiftUI
 import LocalAuthentication
-import FindSwiftSDK
 
 class FCLModel: NSObject, ObservableObject {
     @Published var defaultColorHex = "38e8c6"
-
-    @Published var FLOAT = float
-
-    @Published var FIND = find
 
     @Published var env: Flow.ChainID = .testnet
 
@@ -100,9 +95,6 @@ class FCLModel: NSObject, ObservableObject {
                     self.loggedIn = true
                 }
             }
-
-            await self.FLOAT.floatIsSetup()
-            await self.FIND.checkFindProfile()
         } catch {
             // TODO: Error handling
             print(error)

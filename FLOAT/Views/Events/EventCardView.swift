@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FLOATSwiftSDK
 
 struct EventCardView: View {
     let event: FLOATEventMetadata

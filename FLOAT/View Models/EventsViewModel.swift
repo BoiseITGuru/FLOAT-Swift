@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FLOATSwiftSDK
 
 class EventsViewModel: ObservableObject {
     @Published var events: [FLOATEventMetadata] = []

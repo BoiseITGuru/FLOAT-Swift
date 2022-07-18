@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FLOATSwiftSDK
 
 struct GroupCardView: View {
     let group: FloatGroup

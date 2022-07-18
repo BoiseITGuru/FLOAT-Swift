@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FLOATSwiftSDK
 
 class GroupsViewModel: ObservableObject {
     @Published var groups: [FloatGroup] = []
