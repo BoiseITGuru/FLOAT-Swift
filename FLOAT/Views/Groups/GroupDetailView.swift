@@ -12,8 +12,6 @@ struct GroupDetailView: View {
     @EnvironmentObject var fclModel: FCLModel
 
     @State var group: FloatGroup
-    @State var isLoading = true
-    @State var loadingMsg = "Please wait while we fetch the events for this group"
 
     var body: some View {
         VStack {
@@ -26,12 +24,11 @@ struct GroupDetailView: View {
                     } placeholder: {
                         ProgressView()
                             .progressViewStyle(.circular)
-                    }
-                    .frame(height: 150)
+                    }.frame(height: 250)
                         .overlay(alignment: .bottomLeading) {
                             ImageOverlay(text: group.name, font: .title)
                         }
-                        .padding(.bottom)
+                        .padding()
                 }
             } else {
                 Text(group.name)
