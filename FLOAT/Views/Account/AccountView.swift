@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import FLOATSwiftSDK
 import FindSwiftSDK
+import FLOATSwiftSDK
 
 struct AccountView: View {
     @EnvironmentObject var fclModel: FCLModel
@@ -43,7 +43,7 @@ struct AccountView: View {
                             .font(.subheadline)
                     }
                 }
-                Button(action: { fclModel.signOut() }) {
+                Button(action: { Task { fclModel.signOut() } }) {
                     Text("Sign Out")
                 }
             }

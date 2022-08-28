@@ -43,9 +43,15 @@ struct GroupDetailView: View {
                 .font(.body)
                 .padding()
 
-            List(group.events, id:\.self) { event in
-                Text(event)
-            }
+//            List(group.events, id:\.self) { event in
+//                Text(event)
+//            }
+            
+//            List {
+//                ForEach(Array(group.events.keys.enumerated()), id:\.element) { value, key in
+//                    Text(group.events[key]?.description ?? "")
+//                }
+//            }
         }
         .navigationTitle("Group Details")
 //        .onAppear {
