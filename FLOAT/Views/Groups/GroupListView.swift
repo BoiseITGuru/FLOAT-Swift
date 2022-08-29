@@ -17,6 +17,8 @@ struct GroupListView: View {
         VStack {
             List(float.groups) { group in
                 GroupCardView(group: group)
+                    .listRowBackground(Color.black)
+                    .listRowSeparator(.hidden)
             }.refreshable {
                 await float.getGroups()
             }

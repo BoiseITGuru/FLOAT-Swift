@@ -18,7 +18,10 @@ struct EventsListView: View {
         VStack {
             List(float.events) { event in
                 EventCardView(event: event)
-            }.refreshable {
+                    .listRowBackground(Color.black)
+                    .listRowSeparator(.hidden)
+            }
+            .refreshable {
                 await float.getEvents()
             }
 
