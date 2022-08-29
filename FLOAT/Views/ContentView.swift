@@ -16,7 +16,7 @@ struct ContentView: View {
                 SignIn()
             } else {
                 TabView {
-                    Text("FLOATs")
+                    FloatsListView()
                         .tabItem {
                             Image(systemName: "greetingcard.fill")
                             Text("FLOATs")

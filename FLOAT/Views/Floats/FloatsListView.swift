@@ -13,10 +13,13 @@ struct FloatsListView: View {
     @ObservedObject var float = sharedFloat
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                
-            }
+        List(float.floats) { float in
+            FloatCardView(float: float)
+                .listRowBackground(Color.black)
+                .listRowSeparator(.hidden)
+        }
+        .refreshable {
+            await float.getEvents()
         }
     }
 }
