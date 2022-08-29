@@ -8,9 +8,12 @@
 import SwiftUI
 import FindSwiftSDK
 import FLOATSwiftSDK
+import CachedAsyncImage
 
 struct AccountView: View {
     @EnvironmentObject var fclModel: FCLModel
+    @ObservedObject var float = sharedFloat
+    @ObservedObject var find = sharedFind
     @State var sharedMinter = ""
     @State var showFINDProfile = false
 
@@ -19,7 +22,7 @@ struct AccountView: View {
             Section(header: Text("Account - FIND Profile")) {
                 HStack(spacing: 10) {
                     if find.profile?.avatar != nil {
-                        AsyncImage(url: URL(string: find.profile?.avatar ?? ""), scale: 2) { image in
+                        CachedAsyncImage(url: URL(string: find.profile?.avatar ?? ""), scale: 2) { image in
                             image
                               .resizable()
                               .clipShape(Circle())

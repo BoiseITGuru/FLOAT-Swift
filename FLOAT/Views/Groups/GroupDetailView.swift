@@ -17,18 +17,11 @@ struct GroupDetailView: View {
         VStack {
             if let groupImage = group.image {
                 VStack {
-                    AsyncImage(url: URL(string: "https://ipfs.infura.io/ipfs/\(groupImage)"), scale: 2) { image in
-                        image
-                          .resizable()
-                          .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        ProgressView()
-                            .progressViewStyle(.circular)
-                    }.frame(height: 250)
+                    IPFSImage(cid: groupImage)
+                        .frame(height: 250)
                         .overlay(alignment: .bottomLeading) {
                             ImageOverlay(text: group.name, font: .title)
                         }
-                        .padding()
                 }
             } else {
                 Text(group.name)

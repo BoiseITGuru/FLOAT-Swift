@@ -14,14 +14,7 @@ struct EventCardView: View {
     var body: some View {
         NavigationLink(destination: Text("Event Details")) {
             HStack {
-                AsyncImage(url: URL(string: "https://ipfs.infura.io/ipfs/\(event.image)"), scale: 2) { image in
-                    image
-                      .resizable()
-                      .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                }
+                IPFSImage(cid: event.image)
                     .frame(width: 50, height: 50)
                 Text(event.name)
             }

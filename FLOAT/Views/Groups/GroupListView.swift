@@ -10,7 +10,7 @@ import FLOATSwiftSDK
 
 struct GroupListView: View {
     @EnvironmentObject var fclModel: FCLModel
-    @ObservedObject var groups = GroupsViewModel()
+    @ObservedObject var float = sharedFloat
     @State var showSheet = false
 
     var body: some View {
@@ -18,7 +18,7 @@ struct GroupListView: View {
             List(float.groups) { group in
                 GroupCardView(group: group)
             }.refreshable {
-                await groups.getGroups()
+                await float.getGroups()
             }
 
             Button(action: { showSheet.toggle() }) {

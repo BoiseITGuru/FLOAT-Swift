@@ -6,17 +6,20 @@
 //
 
 import SwiftUI
+import FLOATSwiftSDK
 
 struct EventsListView: View {
     @EnvironmentObject var fclModel: FCLModel
-    @ObservedObject var events = EventsViewModel()
+    @ObservedObject var float = sharedFloat
 
     @State var showSheet = false
 
     var body: some View {
         VStack {
-            List(events.events) { event in
+            List(float.events) { event in
                 EventCardView(event: event)
+            }.refreshable {
+                await float.getEvents()
             }
 
             Button(action: { showSheet.toggle() }) {
@@ -31,11 +34,6 @@ struct EventsListView: View {
                     )
             }
             .padding()
-        }
-        .onAppear {
-            Task {
-                await events.getEvents()
-            }
         }
         .sheet(isPresented: $showSheet) {
             GroupCreateView(showSheet: $showSheet)
