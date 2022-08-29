@@ -16,8 +16,6 @@ import SwiftUI
 import LocalAuthentication
 
 class FCLModel: NSObject, ObservableObject {
-    @Published var defaultColorHex = "38e8c6"
-
     @Published var env: Flow.ChainID = .testnet
 
     @Published var loggedIn = false

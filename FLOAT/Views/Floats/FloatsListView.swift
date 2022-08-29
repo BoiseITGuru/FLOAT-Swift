@@ -13,13 +13,22 @@ struct FloatsListView: View {
     @ObservedObject var float = sharedFloat
     
     var body: some View {
-        List(float.floats) { float in
-            FloatCardView(float: float)
-                .listRowBackground(Color.black)
-                .listRowSeparator(.hidden)
-        }
-        .refreshable {
-            await float.getEvents()
+        ZStack {
+            BackgroundView()
+            ScrollView {
+                LazyVStack {
+                    ForEach(float.floats) { float in
+                        FloatCardView(float: float)
+                            .padding(.horizontal, 1)
+                            .padding(.bottom, 5)
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }.onAppear() {
+            Task {
+                await float.getFloats()
+            }
         }
     }
 }

@@ -25,13 +25,13 @@ struct GroupListView: View {
 
             Button(action: { showSheet.toggle() }) {
                 Label("Create A New Group", systemImage: "plus.circle")
-                    .foregroundColor(Color(hex: fclModel.defaultColorHex))
+                    .foregroundColor(Color(type: .accentColor))
                     .padding(10.0)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10.0)
                             .stroke(lineWidth: 2.0)
-                            .shadow(color: Color(hex: fclModel.defaultColorHex), radius: 10.0)
-                            .foregroundColor(Color(hex: fclModel.defaultColorHex))
+                            .shadow(color: Color(type: .accentColor), radius: 10.0)
+                            .foregroundColor(Color(type: .accentColor))
                     )
             }
             .padding()

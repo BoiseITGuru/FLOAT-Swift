@@ -13,31 +13,35 @@ struct SignIn: View {
 
     var body: some View {
         VStack {
+            Text("FLOAT")
+                .font(.largeTitle)
+                .foregroundColor(Color(type: .accentColor))
+                .padding(.bottom, 20)
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding(.bottom, 100)
+            
             Button(action: { Task { await fclModel.authn() } }) {
-                Label("Sign In", systemImage: "person")
-                    .foregroundColor(Color(hex: fclModel.defaultColorHex))
-                    .padding(10.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10.0)
-                            .stroke(lineWidth: 2.0)
-                            .shadow(color: Color(hex: fclModel.defaultColorHex), radius: 10.0)
-                            .foregroundColor(Color(hex: fclModel.defaultColorHex))
-                    )
+                Text("Log In")
+                    .font(.title2)
+                    .foregroundColor(Color(type: .textColor))
             }
+                .frame(maxWidth: .infinity, maxHeight: 40)
+                .background(Color(type: .accentColor))
+                .cornerRadius(15)
+                .buttonStyle(PlainButtonStyle())
 
-            Form {
+            if fclModel.env == .mainnet || fclModel.env == .testnet {
                 Picker("Wallet Provider", selection: $fclModel.provider, content: {
-                    Text("Dapper").tag(FCLProvider.dapper)
                     Text("Blocto").tag(FCLProvider.blocto)
+                    Text("Dapper").tag(FCLProvider.dapper)
                 }).onChange(of: fclModel.provider, perform: { _ in
                     fclModel.changeWallet()
                 })
             }
         }
+        .padding(.horizontal, 20)
     }
 }
 

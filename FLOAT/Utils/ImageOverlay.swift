@@ -17,7 +17,7 @@ struct ImageOverlay: View {
             Text(text)
                 .font(font)
                 .padding(6)
-                .foregroundColor(Color(hex: fclModel.defaultColorHex))
+                .foregroundColor(Color(type: .accentColor))
         }
             .background(Color.black)
             .opacity(0.8)

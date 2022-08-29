@@ -11,6 +11,10 @@ import SwiftUI
 struct FLOATsApp: App {
     @StateObject var fclModel = FCLModel()
     
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color(type: .backgroundColor))
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

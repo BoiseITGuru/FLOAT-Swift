@@ -1,5 +1,6 @@
-# Created by https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager,swiftpm,macos,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,swift,swiftpackagemanager,swiftpm,macos,windows
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+# Created by https://www.toptal.com/developers/gitignore/api/xcode,windows,swift,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,windows,swift,macos
 
 ### macOS ###
 # General
@@ -8,8 +9,7 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
-
+Icon
 
 # Thumbnails
 ._*
@@ -118,15 +118,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-### SwiftPackageManager ###
-Packages
-xcuserdata
-*.xcodeproj
-
-
-### SwiftPM ###
-
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -165,4 +156,7 @@ $RECYCLE.BIN/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager,swiftpm,macos,windows
+# End of https://www.toptal.com/developers/gitignore/api/xcode,windows,swift,macos
+
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+

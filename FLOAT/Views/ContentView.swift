@@ -12,37 +12,39 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            if !fclModel.loggedIn {
-                SignIn()
-            } else {
-                TabView {
-                    FloatsListView()
-                        .tabItem {
-                            Image(systemName: "greetingcard.fill")
-                            Text("FLOATs")
-                        }
-                    EventsListView()
-                        .tabItem {
-                            Image(systemName: "greetingcard.fill")
-                            Text("Events")
-                        }
-                    GroupListView()
-                        .tabItem {
-                            Image(systemName: "greetingcard.fill")
-                            Text("Groups")
-                        }
-                    AccountView()
-                        .tabItem {
-                            Image(systemName: "greetingcard.fill")
-                            Text("Account")
-                        }
+            ZStack {
+                BackgroundView()
+                if !fclModel.loggedIn {
+                    SignIn()
+                } else {
+                    TabView {
+                        FloatsListView()
+                            .tabItem {
+                                Image(systemName: "greetingcard.fill")
+                                Text("FLOATs")
+                            }
+                        EventsListView()
+                            .tabItem {
+                                Image(systemName: "greetingcard.fill")
+                                Text("Events")
+                            }
+                        GroupListView()
+                            .tabItem {
+                                Image(systemName: "greetingcard.fill")
+                                Text("Groups")
+                            }
+                        AccountView()
+                            .tabItem {
+                                Image(systemName: "greetingcard.fill")
+                                Text("Account")
+                            }
+                    }
+                    .accentColor(Color(type: .accentColor))
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("FLOAT")
                 }
-                .accentColor(Color(hex: fclModel.defaultColorHex))
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("FLOATs")
             }
         }
-//        .onAppear(perform: fclModel.faceIdAuth)
     }
 }
 
