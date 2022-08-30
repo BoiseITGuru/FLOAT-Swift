@@ -13,6 +13,7 @@ struct FLOATsApp: App {
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor(Color(type: .backgroundColor))
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     var body: some Scene {

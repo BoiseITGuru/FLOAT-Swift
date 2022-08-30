@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BC619DB28BD985B00BA6F75 /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = 2BC619DA28BD985B00BA6F75 /* FCL */; };
+		2BC619DD28BD985B00BA6F75 /* FindSwiftSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2BC619DC28BD985B00BA6F75 /* FindSwiftSDK */; };
+		2BC619DF28BD985B00BA6F75 /* FLOATSwiftSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 2BC619DE28BD985B00BA6F75 /* FLOATSwiftSDK */; };
+		2BC619E128BD985B00BA6F75 /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = 2BC619E028BD985B00BA6F75 /* Flow */; };
+		2BC619E328BDA09E00BA6F75 /* AccountProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC619E228BDA09E00BA6F75 /* AccountProfileView.swift */; };
+		2BC619E528BDA37B00BA6F75 /* AccountSharedMinterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC619E428BDA37B00BA6F75 /* AccountSharedMinterView.swift */; };
+		2BC619E728BDA3EB00BA6F75 /* AccountSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC619E628BDA3EB00BA6F75 /* AccountSetupView.swift */; };
+		2BC619E928BDA96400BA6F75 /* PlaceholderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC619E828BDA96400BA6F75 /* PlaceholderExtension.swift */; };
 		BB0F5325288232BC00A22C82 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0F5324288232BC00A22C82 /* LoadingView.swift */; };
 		BB1728EF28BC1A45006F14ED /* IPFSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1728EE28BC1A45006F14ED /* IPFSImage.swift */; };
 		BB1728F528BC3291006F14ED /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = BB1728F428BC3291006F14ED /* CachedAsyncImage */; };
@@ -18,10 +26,6 @@
 		BB313DB3287F8D63009BAE7F /* ImageOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB313DB0287F8D63009BAE7F /* ImageOverlay.swift */; };
 		BB7D4CEF2883B01D00573303 /* EventsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D4CEE2883B01D00573303 /* EventsListView.swift */; };
 		BB7D4CF32883B0C900573303 /* EventCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7D4CF22883B0C900573303 /* EventCardView.swift */; };
-		BB93D0E128B2E7890059ACAA /* FCL in Frameworks */ = {isa = PBXBuildFile; productRef = BB93D0E028B2E7890059ACAA /* FCL */; };
-		BB93D0E328B2E78C0059ACAA /* FindSwiftSDK in Frameworks */ = {isa = PBXBuildFile; productRef = BB93D0E228B2E78C0059ACAA /* FindSwiftSDK */; };
-		BB93D0E528B2E7910059ACAA /* FLOATSwiftSDK in Frameworks */ = {isa = PBXBuildFile; productRef = BB93D0E428B2E7910059ACAA /* FLOATSwiftSDK */; };
-		BB93D0E828B2E9620059ACAA /* Flow in Frameworks */ = {isa = PBXBuildFile; productRef = BB93D0E728B2E9620059ACAA /* Flow */; };
 		BBB7491A28BD17E800013544 /* DefaultColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7491928BD17E800013544 /* DefaultColors.swift */; };
 		BBB7491C28BD1B5200013544 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB7491B28BD1B5100013544 /* BackgroundView.swift */; };
 		BBC77D4E287F89E900094926 /* FLOATsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC77D4D287F89E900094926 /* FLOATsApp.swift */; };
@@ -29,7 +33,6 @@
 		BBC77D52287F89F100094926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC77D51287F89F100094926 /* Assets.xcassets */; };
 		BBC77D55287F89F100094926 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC77D54287F89F100094926 /* Preview Assets.xcassets */; };
 		BBD7DC9F288064B200CC2430 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7DC9E288064B200CC2430 /* AccountView.swift */; };
-		BBD7DCA228806F7D00CC2430 /* SetupAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7DCA128806F7D00CC2430 /* SetupAccountView.swift */; };
 		BBD7DCA5288090A600CC2430 /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7DCA4288090A600CC2430 /* GroupListView.swift */; };
 		BBD7DCA7288093F300CC2430 /* GroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7DCA6288093F300CC2430 /* GroupCardView.swift */; };
 		BBD7DCB628812FDF00CC2430 /* GroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD7DCB528812FDF00CC2430 /* GroupDetailView.swift */; };
@@ -37,6 +40,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BC619D628BD95F700BA6F75 /* flow-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "flow-swift"; path = "../../Flow/flow-swift"; sourceTree = "<group>"; };
+		2BC619D728BD960A00BA6F75 /* fcl-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "fcl-swift"; path = "../../Flow/fcl-swift"; sourceTree = "<group>"; };
+		2BC619D828BD980E00BA6F75 /* FIND-Swift-SDK */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FIND-Swift-SDK"; path = "../../FIND/FIND-Swift-SDK"; sourceTree = "<group>"; };
+		2BC619D928BD984300BA6F75 /* FLOAT-Swift-SDK */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FLOAT-Swift-SDK"; path = "../FLOAT-Swift-SDK"; sourceTree = "<group>"; };
+		2BC619E228BDA09E00BA6F75 /* AccountProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProfileView.swift; sourceTree = "<group>"; };
+		2BC619E428BDA37B00BA6F75 /* AccountSharedMinterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSharedMinterView.swift; sourceTree = "<group>"; };
+		2BC619E628BDA3EB00BA6F75 /* AccountSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetupView.swift; sourceTree = "<group>"; };
+		2BC619E828BDA96400BA6F75 /* PlaceholderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderExtension.swift; sourceTree = "<group>"; };
 		BB0F5324288232BC00A22C82 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BB1728EE28BC1A45006F14ED /* IPFSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPFSImage.swift; sourceTree = "<group>"; };
 		BB1728F728BC3E35006F14ED /* FloatsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatsListView.swift; sourceTree = "<group>"; };
@@ -47,8 +58,6 @@
 		BB313DB0287F8D63009BAE7F /* ImageOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageOverlay.swift; sourceTree = "<group>"; };
 		BB7D4CEE2883B01D00573303 /* EventsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListView.swift; sourceTree = "<group>"; };
 		BB7D4CF22883B0C900573303 /* EventCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardView.swift; sourceTree = "<group>"; };
-		BB8F9C3228B2E435008A42D9 /* FindSwiftSDK */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FindSwiftSDK; path = ../../FIND/FindSwiftSDK; sourceTree = "<group>"; };
-		BB93D0E628B2E92A0059ACAA /* flow-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "flow-swift"; path = "../../flow-swift"; sourceTree = "<group>"; };
 		BBB7491928BD17E800013544 /* DefaultColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColors.swift; sourceTree = "<group>"; };
 		BBB7491B28BD1B5100013544 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		BBC77D4A287F89E900094926 /* FLOAT By ECD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FLOAT By ECD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,13 +66,10 @@
 		BBC77D51287F89F100094926 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBC77D54287F89F100094926 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BBD7DC9E288064B200CC2430 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		BBD7DCA128806F7D00CC2430 /* SetupAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupAccountView.swift; sourceTree = "<group>"; };
 		BBD7DCA4288090A600CC2430 /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		BBD7DCA6288093F300CC2430 /* GroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCardView.swift; sourceTree = "<group>"; };
 		BBD7DCB528812FDF00CC2430 /* GroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDetailView.swift; sourceTree = "<group>"; };
 		BBD7DCB728812FF700CC2430 /* GroupCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCreateView.swift; sourceTree = "<group>"; };
-		BBF3002328B2E1F900228052 /* fcl-swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "fcl-swift"; path = "../../fcl-swift"; sourceTree = "<group>"; };
-		BBF3002428B2E29800228052 /* FLOATSwiftSDK */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FLOATSwiftSDK; path = ../FLOATSwiftSDK; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,17 +77,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB93D0E828B2E9620059ACAA /* Flow in Frameworks */,
+				2BC619DB28BD985B00BA6F75 /* FCL in Frameworks */,
+				2BC619E128BD985B00BA6F75 /* Flow in Frameworks */,
 				BB1728F528BC3291006F14ED /* CachedAsyncImage in Frameworks */,
-				BB93D0E528B2E7910059ACAA /* FLOATSwiftSDK in Frameworks */,
-				BB93D0E328B2E78C0059ACAA /* FindSwiftSDK in Frameworks */,
-				BB93D0E128B2E7890059ACAA /* FCL in Frameworks */,
+				2BC619DF28BD985B00BA6F75 /* FLOATSwiftSDK in Frameworks */,
+				2BC619DD28BD985B00BA6F75 /* FindSwiftSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BC619D528BD95F700BA6F75 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2BC619D628BD95F700BA6F75 /* flow-swift */,
+				2BC619D728BD960A00BA6F75 /* fcl-swift */,
+				2BC619D828BD980E00BA6F75 /* FIND-Swift-SDK */,
+				2BC619D928BD984300BA6F75 /* FLOAT-Swift-SDK */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		BB1728F628BC3E1B006F14ED /* Floats */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,19 +140,9 @@
 				BB0F5324288232BC00A22C82 /* LoadingView.swift */,
 				BB1728EE28BC1A45006F14ED /* IPFSImage.swift */,
 				BBB7491928BD17E800013544 /* DefaultColors.swift */,
+				2BC619E828BDA96400BA6F75 /* PlaceholderExtension.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		BB3B864A288CE9E8003E16AE /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				BBF3002328B2E1F900228052 /* fcl-swift */,
-				BBF3002428B2E29800228052 /* FLOATSwiftSDK */,
-				BB8F9C3228B2E435008A42D9 /* FindSwiftSDK */,
-				BB93D0E628B2E92A0059ACAA /* flow-swift */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		BB62495B288CEBAD0061793A /* Frameworks */ = {
@@ -157,7 +164,7 @@
 		BBC77D41287F89E900094926 = {
 			isa = PBXGroup;
 			children = (
-				BB3B864A288CE9E8003E16AE /* Packages */,
+				2BC619D528BD95F700BA6F75 /* Packages */,
 				BBC77D4C287F89E900094926 /* FLOAT */,
 				BBC77D4B287F89E900094926 /* Products */,
 				BB62495B288CEBAD0061793A /* Frameworks */,
@@ -194,8 +201,10 @@
 		BBD7DCA0288064B500CC2430 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				BBD7DCA128806F7D00CC2430 /* SetupAccountView.swift */,
 				BBD7DC9E288064B200CC2430 /* AccountView.swift */,
+				2BC619E228BDA09E00BA6F75 /* AccountProfileView.swift */,
+				2BC619E428BDA37B00BA6F75 /* AccountSharedMinterView.swift */,
+				2BC619E628BDA3EB00BA6F75 /* AccountSetupView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -228,11 +237,11 @@
 			);
 			name = FLOAT;
 			packageProductDependencies = (
-				BB93D0E028B2E7890059ACAA /* FCL */,
-				BB93D0E228B2E78C0059ACAA /* FindSwiftSDK */,
-				BB93D0E428B2E7910059ACAA /* FLOATSwiftSDK */,
-				BB93D0E728B2E9620059ACAA /* Flow */,
 				BB1728F428BC3291006F14ED /* CachedAsyncImage */,
+				2BC619DA28BD985B00BA6F75 /* FCL */,
+				2BC619DC28BD985B00BA6F75 /* FindSwiftSDK */,
+				2BC619DE28BD985B00BA6F75 /* FLOATSwiftSDK */,
+				2BC619E028BD985B00BA6F75 /* Flow */,
 			);
 			productName = FLOATs;
 			productReference = BBC77D4A287F89E900094926 /* FLOAT By ECD.app */;
@@ -292,18 +301,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD7DC9F288064B200CC2430 /* AccountView.swift in Sources */,
+				2BC619E528BDA37B00BA6F75 /* AccountSharedMinterView.swift in Sources */,
 				BB1728EF28BC1A45006F14ED /* IPFSImage.swift in Sources */,
+				2BC619E928BDA96400BA6F75 /* PlaceholderExtension.swift in Sources */,
 				BBD7DCB828812FF700CC2430 /* GroupCreateView.swift in Sources */,
 				BBD7DCA5288090A600CC2430 /* GroupListView.swift in Sources */,
 				BB313DAA287F8CFF009BAE7F /* FCLModel.swift in Sources */,
-				BBD7DCA228806F7D00CC2430 /* SetupAccountView.swift in Sources */,
 				BB0F5325288232BC00A22C82 /* LoadingView.swift in Sources */,
 				BB1728F828BC3E35006F14ED /* FloatsListView.swift in Sources */,
 				BB313DB1287F8D63009BAE7F /* HexColor.swift in Sources */,
+				2BC619E328BDA09E00BA6F75 /* AccountProfileView.swift in Sources */,
 				BBB7491A28BD17E800013544 /* DefaultColors.swift in Sources */,
 				BBB7491C28BD1B5200013544 /* BackgroundView.swift in Sources */,
 				BB313DB2287F8D63009BAE7F /* SignIn.swift in Sources */,
 				BBD7DCA7288093F300CC2430 /* GroupCardView.swift in Sources */,
+				2BC619E728BDA3EB00BA6F75 /* AccountSetupView.swift in Sources */,
 				BBC77D50287F89E900094926 /* ContentView.swift in Sources */,
 				BB313DB3287F8D63009BAE7F /* ImageOverlay.swift in Sources */,
 				BB7D4CEF2883B01D00573303 /* EventsListView.swift in Sources */,
@@ -445,9 +457,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,9 +486,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,26 +536,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2BC619DA28BD985B00BA6F75 /* FCL */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FCL;
+		};
+		2BC619DC28BD985B00BA6F75 /* FindSwiftSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FindSwiftSDK;
+		};
+		2BC619DE28BD985B00BA6F75 /* FLOATSwiftSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FLOATSwiftSDK;
+		};
+		2BC619E028BD985B00BA6F75 /* Flow */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Flow;
+		};
 		BB1728F428BC3291006F14ED /* CachedAsyncImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BB1728F328BC3291006F14ED /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
 			productName = CachedAsyncImage;
-		};
-		BB93D0E028B2E7890059ACAA /* FCL */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FCL;
-		};
-		BB93D0E228B2E78C0059ACAA /* FindSwiftSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FindSwiftSDK;
-		};
-		BB93D0E428B2E7910059ACAA /* FLOATSwiftSDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FLOATSwiftSDK;
-		};
-		BB93D0E728B2E9620059ACAA /* Flow */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Flow;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
