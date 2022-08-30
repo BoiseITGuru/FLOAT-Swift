@@ -11,6 +11,7 @@ import FLOATSwiftSDK
 struct GroupListView: View {
     @EnvironmentObject var fclModel: FCLModel
     @ObservedObject var float = sharedFloat
+    @State private var searchText = ""
     @State var showSheet = false
 
     var body: some View {
@@ -19,21 +20,12 @@ struct GroupListView: View {
             VStack {
                 ScrollView {
                     LazyVStack {
-                        ForEach(float.groups) { group in
+                        ForEach(searchResults) { group in
                             GroupCardView(group: group)
                         }
                     }
                 }
-                
-                Button(action: { showSheet.toggle() }) {
-                    Text("Create A New Group")
-                        .font(.title2)
-                        .foregroundColor(Color(type: .textColor))
-                }
-                    .frame(maxWidth: .infinity, maxHeight: 40)
-                    .background(Color(type: .accentColor))
-                    .cornerRadius(15)
-                    .buttonStyle(PlainButtonStyle())
+                .searchable(text: $searchText)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 10)
@@ -41,10 +33,30 @@ struct GroupListView: View {
         .sheet(isPresented: $showSheet) {
             GroupCreateView(showSheet: $showSheet)
         }
+        .toolbar {
+            Button(action: { showSheet.toggle() }) {
+                Image(systemName: "plus.circle.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color(type: .accentColor))
+                    .background(Color(type: .backgroundColor))
+                    .cornerRadius(55/2)
+                    .overlay(RoundedRectangle(cornerRadius: 55/2).stroke(Color(type: .backgroundColor), lineWidth: 2))
+                    .accessibility(identifier: "CreateGroupButton")
+            }
+        }
         .onAppear() {
             Task {
                 await float.getGroups()
             }
+        }
+    }
+    
+    var searchResults: [FloatGroup] {
+        if searchText.isEmpty {
+            return float.groups
+        } else {
+            return float.groups.filter { $0.name.contains(searchText) }
         }
     }
 }

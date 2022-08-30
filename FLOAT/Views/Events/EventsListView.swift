@@ -11,7 +11,7 @@ import FLOATSwiftSDK
 struct EventsListView: View {
     @EnvironmentObject var fclModel: FCLModel
     @ObservedObject var float = sharedFloat
-
+    @State private var searchText = ""
     @State var showSheet = false
 
     var body: some View {
@@ -20,23 +20,14 @@ struct EventsListView: View {
             VStack {
                 ScrollView {
                     LazyVStack {
-                        ForEach(float.events) { event in
+                        ForEach(searchResults) { event in
                             EventCardView(event: event)
                                 .padding(.horizontal, 1)
                                 .padding(.bottom, 5)
                         }
                     }
                 }
-                
-                Button(action: { showSheet.toggle() }) {
-                    Text("Create A New Event")
-                        .font(.title2)
-                        .foregroundColor(Color(type: .textColor))
-                }
-                    .frame(maxWidth: .infinity, maxHeight: 40)
-                    .background(Color(type: .accentColor))
-                    .cornerRadius(15)
-                    .buttonStyle(PlainButtonStyle())
+                .searchable(text: $searchText)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 10)
@@ -48,6 +39,14 @@ struct EventsListView: View {
             Task {
                 await float.getEvents()
             }
+        }
+    }
+    
+    var searchResults: [FLOATEventMetadata] {
+        if searchText.isEmpty {
+            return float.events
+        } else {
+            return float.events.filter { $0.name.contains(searchText) }
         }
     }
 }

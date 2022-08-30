@@ -16,7 +16,7 @@ import SwiftUI
 import LocalAuthentication
 
 class FCLModel: NSObject, ObservableObject {
-    @Published var env: Flow.ChainID = .testnet
+    @Published var env: Flow.ChainID = .mainnet
 
     @Published var loggedIn = false
 
