@@ -12,7 +12,6 @@ struct FLOATsApp: App {
     @StateObject var fclModel = FCLModel()
     
     init() {
-        UITabBar.appearance().backgroundColor = UIColor(Color(type: .backgroundColor))
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     

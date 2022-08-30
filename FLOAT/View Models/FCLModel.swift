@@ -99,34 +99,6 @@ class FCLModel: NSObject, ObservableObject {
         }
     }
 
-//    func faceIdAuth() {
-//        let context = LAContext()
-//        var error: NSError?
-//        let address = defaults.object(forKey: "address") as? String ?? ""
-//
-//        //Check If Address has been set
-//        if address != "" {
-//            // check whether biometric authentication is possible
-//            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-//                // it's possible, so go ahead and use it
-//                let reason = "Face ID is used to keep you logged into your wallet between app loads"
-//
-//                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-//                    // authentication has now completed
-//                    if success {
-//                        // authenticated successfully
-//                        self.address = "123465"
-//                    } else {
-//                        // there was a problem
-//                        self.signOut()
-//                    }
-//                }
-//            } else {
-//                // no biometrics
-//            }
-//        }
-//    }
-
     func signOut() {
         self.defaults.removeObject(forKey: "address")
         self.address = ""
