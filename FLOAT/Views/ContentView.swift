@@ -36,7 +36,7 @@ struct ContentView: View {
                                 systemImageName: "greetingcard.fill",
                                 text: "FLOATs",
                                 font: Font.system(size: 14))) {
-                                    FloatsListView()
+                            FloatsListView()
                         }
                         
                         TabScreen(
@@ -44,7 +44,7 @@ struct ContentView: View {
                                 systemImageName: "greetingcard.fill",
                                 text: "EVENTs",
                                 font: Font.system(size: 14))) {
-                                    EventsListView()
+                            EventsListView()
                         }
                         
                         TabModal {
@@ -66,7 +66,7 @@ struct ContentView: View {
                                 systemImageName: "greetingcard.fill",
                                 text: "GROUPs",
                                 font: Font.system(size: 14))) {
-                                    GroupListView()
+                            GroupListView()
                         }
                         
                         TabScreen(
@@ -74,7 +74,7 @@ struct ContentView: View {
                                 systemImageName: "greetingcard.fill",
                                 text: "ACCOUNT",
                                 font: Font.system(size: 14))) {
-                                    AccountView()
+                            AccountView()
                         }
 
                     }
@@ -84,6 +84,7 @@ struct ContentView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

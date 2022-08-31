@@ -14,7 +14,7 @@ extension Color {
 }
 
 enum DefaultColors: String {
-    case backgroundColor = "011E30"
+    case backgroundColor = "18232c"
     case accentColor = "38e8c6"
     case textColor = "1e3a8a"
 }
